@@ -29,6 +29,15 @@ type SectionProps = PropsWithChildren<{
   title: string;
 }>;
 
+// Setup Reactotron in DEV mode (Debug builds) only
+if (__DEV__ && !process.env.JEST_WORKER_ID) {
+  require('./ReactotronConfig');
+  console.log(
+    'Reactotron Configured.\n' +
+      'Download Reactotron at https://github.com/infinitered/reactotron/releases?q=reactotron-app&expanded=true\n',
+  );
+}
+
 function Section({children, title}: SectionProps): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
   return (
